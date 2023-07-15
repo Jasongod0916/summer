@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form method="post" action="upload_01.php" enctype="multipart/form-data">
+    <input type="file" name="myfile" onchange="previewImage(event)" accept="image/*"><br><br>
+    <img id="preview" alt="Preview Image" style="max-width: 200px; max-height: 200px; display: none;"><br><br>
+    <input type="submit" value="上傳">
+    <input type="reset" value="重新設定">
+  </form>
+  <script>
+    function previewImage(event) 
+    {
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = function() {
+        var preview = document.getElementById('preview');
+        preview.src = reader.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  </script>
+</body>
+</html>
+
