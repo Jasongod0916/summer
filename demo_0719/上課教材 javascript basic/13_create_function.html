@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create function</title>
+    <style>
+        body{
+            background-color: rgb(204, 228, 228);
+        }
+        .msgBox{
+            position: relative;
+            top: 20px;
+            left: 100px;
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: aliceblue;
+        }
+        .close{
+            position: absolute;
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+           
+            background-color: brown;
+            padding: 10px;
+            border-radius: 10px;
+            top: 5px;
+            right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>call displayMessage function</button>
+</body>
+<script>
+    but = document.querySelector("button")
+    but.onclick = displayMessage
+
+    // but.onclick = displayMessage()
+
+    // but.onclick = function () {
+    //     displayMessage()
+    // }
+    // 定義一個名為 displayMessage 的函式
+    function displayMessage() {
+        var html = document.querySelector("html");
+
+        var panel = document.createElement("div");
+        panel.setAttribute("class", "msgBox");
+        html.appendChild(panel);
+
+        var closeBtn = document.createElement("button");
+        closeBtn.textContent = "x";
+        closeBtn.setAttribute("class", "close");
+        panel.appendChild(closeBtn);
+
+        // 創建一個 <p> 元素
+        var msg = document.createElement("p");
+        msg.textContent = "This is a message box";
+        panel.appendChild(msg);
+
+        
+        // 為關閉按鈕設置點擊事件處理函式
+        closeBtn.onclick = function () {
+            // 當關閉按鈕被點擊時，從其父節點中移除整個訊息框
+            panel.parentNode.removeChild(panel);
+        };
+    }
+displayMessage();
+</script>
+
+</html>
