@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding-top: 30%;
+            display: flex;
+            justify-content: center;
+            background-color: rgb(188, 235, 235);
+        }
+        form{
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            box-shadow:  3px 2px 2px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        
+        .block{
+            margin: 10px;
+            border-radius: 20px;
+        }
+        button{
+            width: fit-content;
+            padding: 5px 20px;
+            font-weight: bold;
+            transition: 0.8s;
+            background-color: rgb(73, 117, 133);
+            color: aliceblue;
+        }
+        button:hover{
+            cursor: pointer;
+            color: aliceblue;
+            background-color: rgb(148, 152, 153);
+        }
+        input[type=text]{
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="http://localhost:3000/Bmi" method="post">
+        <div style="margin: 10px;">
+            <a>身高</a>
+            <input class="block" type="text" name="height" placeholder="You Height(m)">
+        </div>
+        <div style="margin: 10px;">
+            <a>體重</a>
+            <input class="block" type="text" name="weight" placeholder="You Weight(kg)">
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <button class="block" type="submit" name="submit">送出</button>
+        </div>
+    </form>
+</body>
+</html>

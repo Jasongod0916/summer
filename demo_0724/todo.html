@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="todoForm">
+        <input type="text" id="todoInput" placeholder="輸入代辦事項" required>
+        <button type="submit">Add</button>
+    </form>
+    <ul id="todoList"></ul>
+    <script>
+        fetch('http://localhost:3000/', {
+            headers: { 'Content-Type': 'applcation/json' }
+        }).then(response => response.json())
+            .then(todoList => {
+                console.log("AAAA")
+                const todoListElelement = document.getElementById('todoList')
+                todoList.forEach(todo => {
+                    const li = document.createElement('li')
+                    li.textContent = todo;
+                    todoListElelement.appendChild(li);
+                });
+            })
+
+        document.getElementById('todoForm').addEventListener('submit', event => {
+            event.preventDefault()
+            const todoinput = document.getElementById('todoInput')
+            const newTodo = todoinput.value
+            fetch('http://localhost:3000/', {
+                method:'POST',
+                headers: { 'Content-Type': 'applcation/json' },
+                body:JSON.stringify({todo:newTodo})
+            }).then(response => response.text)
+                .then(message => {
+                    const todoListElelement = document.getElementById('todoList')
+                    console.log(message);
+                    todoinput.value = ''
+                    const li = document.createElement('li')
+                    li.textContent = newTodo;
+                    todoListElelement.appendChild(li);
+                })  
+        })
+
+    </script>
+</body>
+
+</html>
