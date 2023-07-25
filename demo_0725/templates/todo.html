@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="getTodoList()">
+
+    <form action="http://localhost:5000/todos" method="POST">
+        <div id="add-todo">
+            <input type="text" name="newTask" id="todo-input" placeholder="Enter a new task">
+            <button id="submit">Add</button>
+        </div>
+    </form>
+
+    <form id="updateForm">
+        <input type="text" id="todoIdInput" name="id" placeholder="Enter an ID">
+        <input type="text" id="taskInput" name="updateTask" placeholder="Enter a new task">
+
+        <button type="submit">Update</button>
+    </form>
+
+    <div id="todoList">
+
+    </div>
+</body>
+
+<script>
+    function getTodoList() {
+        fetch('http://localhost:5000/todos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.text())
+            .then(rj => {
+                console.log(rj)
+                document.getElementById('todoList').innerText = rj
+            })
+    }
+    
+    // let btnGetList = document.getElementById("getTodo")
+    // if (btnGetList) {
+    //     btnGetList.addEventListener("click", getTodoList())
+    // }
+
+    
+    const updateTodo = (event) => {
+        event.preventDefault();
+
+        const form = document.getElementById("updateForm");
+        const formData = new FormData(form);
+
+        fetch(`http://localhost:5000/todos/${formData.get("id")}`, {
+            method: "PUT",
+            body: formData
+        }).then(getTodoList())
+    };
+
+    const updateForm = document.getElementById("updateForm");
+    updateForm.addEventListener("submit", updateTodo);
+</script>
+
+</html>
